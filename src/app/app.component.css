@@ -1,0 +1,22 @@
+#header {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  background: #1E2832;
+}
+
+#footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 80px;
+  font-size: 14px;
+  color: white;
+  background: #1E2832;
+}
+
+.title {
+  color: white;
+  font-family: Verdana, serif;
+}
