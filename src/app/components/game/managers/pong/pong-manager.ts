@@ -31,7 +31,6 @@ export class PongManager implements GameManager {
   setup(): void {
     const canvas = this.p5.createCanvas(this.width, this.height);
     canvas.parent('sketch-holder');
-    this.p5.frameRate(60);
   }
 
   update(): void {
