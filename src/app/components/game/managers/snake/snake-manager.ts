@@ -1,0 +1,112 @@
+import * as P5 from 'p5';
+import {GameManager} from '../../game-manager';
+import {Direction, Snake} from './snake';
+import {Food} from './food';
+import {Config} from './config';
+
+export class SnakeManager implements GameManager {
+  p5: P5;
+  width;
+  height;
+  private snake: Snake;
+  private food: Food;
+  private isGameOver: boolean;
+
+  constructor(p5: P5) {
+    this.p5 = p5;
+    this.width = Config.cols * Config.unitLength;
+    this.height = Config.rows * Config.unitLength;
+    this.snake = new Snake(p5);
+    this.food = new Food(p5);
+    this.isGameOver = false;
+  }
+
+  preload(): void {
+    this.food.setImage(this.p5.loadImage('/assets/snake/apple.png'));
+  }
+
+  setup(): void {
+    const canvas = this.p5.createCanvas(this.width, this.height);
+    canvas.parent('sketch-holder');
+    this.p5.frameRate(18);
+  }
+
+  update(): void {
+    if (!this.isGameOver) {
+      this.snake.update();
+      const [foodX, foodY] = this.food.getPosition();
+      if (this.snake.positionsX[0] === foodX && this.snake.positionsY[0] === foodY) {
+        this.handleEatFood();
+      }
+      if (this.snake.checkCollide()) {
+        this.isGameOver = true;
+      }
+    }
+  }
+
+  draw(): void {
+    this.p5.background(255);
+    this.food.draw();
+    this.snake.draw();
+    this.drawBorders();
+    if (this.isGameOver) {
+      this.drawGameOverMessage();
+    }
+  }
+
+  keyPressListener(keyCode: number): void {
+    if (!this.isGameOver) {
+      const dx = this.snake.positionsX[0] - this.snake.positionsX[1];
+      const dy = this.snake.positionsY[0] - this.snake.positionsY[1];
+      if ((keyCode === 87 || keyCode === 38) && dy <= 0) {
+        this.snake.setDirection(Direction.up);
+      } else if ((keyCode === 83 || keyCode === 40) && dy >= 0) {
+        this.snake.setDirection(Direction.down);
+      } else if ((keyCode === 65 || keyCode === 37) && dx <= 0) {
+        this.snake.setDirection(Direction.left);
+      } else if ((keyCode === 68 || keyCode === 39) && dx >= 0) {
+        this.snake.setDirection(Direction.right);
+      }
+    }
+  }
+
+  keyReleaseListener(keyCode: number): void { }
+
+  handleEatFood(): void {
+    let [foodX, foodY] = this.food.getPosition();
+    this.snake.grow();
+    this.food.randomMove();
+    while (true) {
+      let appleMisplaced = false;
+      for (let i = 0; i < this.snake.getSize(); i++) {
+        [foodX, foodY] = this.food.getPosition();
+        if (this.snake.positionsX[i] === foodX && this.snake.positionsY[i] === foodY) {
+          appleMisplaced = true;
+          break;
+        }
+      }
+      if (!appleMisplaced) {
+        break;
+      }
+      this.food.randomMove();
+    }
+  }
+
+  drawBorders(): void {
+    this.p5.push();
+    this.p5.noFill();
+    this.p5.strokeWeight(2 * Config.unitLength);
+    this.p5.rect(0, 0, this.width, this.height);
+    this.p5.pop();
+  }
+
+  drawGameOverMessage(): void {
+    this.p5.push();
+    this.p5.fill(0);
+    this.p5.textSize(30);
+    this.p5.text('yuo died', 64, 80);
+    this.p5.text('score: ' + (this.snake.getSize() - 3), 64, 120);
+    this.p5.text('ctrl+r to restart', 64, 160);
+    this.p5.pop();
+  }
+}
