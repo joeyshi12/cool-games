@@ -63,7 +63,7 @@ export class Snake {
     this.size++;
   }
 
-  hasCollided(): boolean {
+  private hasCollided(): boolean {
     if (this.isDead) {
       return true;
     }

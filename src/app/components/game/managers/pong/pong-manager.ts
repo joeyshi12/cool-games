@@ -27,7 +27,7 @@ export class PongManager implements GameManager {
   }
 
   preload(): void {
-    const soundFile = new P5.SoundFile('/assets/bounce_sound.wav');
+    const soundFile = new P5.SoundFile('/assets/pong/bounce_sound.wav');
     soundFile.setVolume(0.04);
     this.player.setBounceSound(soundFile);
     this.opponent.setBounceSound(soundFile);
