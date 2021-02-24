@@ -10,7 +10,6 @@ export class SnakeManager implements GameManager {
   height;
   private snake: Snake;
   private food: Food;
-  private isGameOver: boolean;
 
   constructor(p5: P5) {
     this.p5 = p5;
@@ -18,7 +17,6 @@ export class SnakeManager implements GameManager {
     this.height = Config.rows * Config.unitLength;
     this.snake = new Snake(p5);
     this.food = new Food(p5);
-    this.isGameOver = false;
   }
 
   preload(): void {
@@ -32,15 +30,10 @@ export class SnakeManager implements GameManager {
   }
 
   update(): void {
-    if (!this.isGameOver) {
-      this.snake.update();
-      const [foodX, foodY] = this.food.getPosition();
-      if (this.snake.positionsX[0] === foodX && this.snake.positionsY[0] === foodY) {
-        this.handleEatFood();
-      }
-      if (this.snake.checkCollide()) {
-        this.isGameOver = true;
-      }
+    this.snake.update();
+    const [foodX, foodY] = this.food.getPosition();
+    if (this.snake.positionsX[0] === foodX && this.snake.positionsY[0] === foodY) {
+      this.handleEatFood();
     }
   }
 
@@ -49,30 +42,28 @@ export class SnakeManager implements GameManager {
     this.food.draw();
     this.snake.draw();
     this.drawBorders();
-    if (this.isGameOver) {
+    if (this.snake.getIsDead()) {
       this.drawGameOverMessage();
     }
   }
 
   keyPressListener(keyCode: number): void {
-    if (!this.isGameOver) {
-      const dx = this.snake.positionsX[0] - this.snake.positionsX[1];
-      const dy = this.snake.positionsY[0] - this.snake.positionsY[1];
-      if ((keyCode === 87 || keyCode === 38) && dy <= 0) {
-        this.snake.setDirection(Direction.up);
-      } else if ((keyCode === 83 || keyCode === 40) && dy >= 0) {
-        this.snake.setDirection(Direction.down);
-      } else if ((keyCode === 65 || keyCode === 37) && dx <= 0) {
-        this.snake.setDirection(Direction.left);
-      } else if ((keyCode === 68 || keyCode === 39) && dx >= 0) {
-        this.snake.setDirection(Direction.right);
-      }
+    const dx = this.snake.positionsX[0] - this.snake.positionsX[1];
+    const dy = this.snake.positionsY[0] - this.snake.positionsY[1];
+    if ((keyCode === 87 || keyCode === 38) && dy <= 0) {
+      this.snake.setDirection(Direction.up);
+    } else if ((keyCode === 83 || keyCode === 40) && dy >= 0) {
+      this.snake.setDirection(Direction.down);
+    } else if ((keyCode === 65 || keyCode === 37) && dx <= 0) {
+      this.snake.setDirection(Direction.left);
+    } else if ((keyCode === 68 || keyCode === 39) && dx >= 0) {
+      this.snake.setDirection(Direction.right);
     }
   }
 
   keyReleaseListener(keyCode: number): void { }
 
-  handleEatFood(): void {
+  private handleEatFood(): void {
     let [foodX, foodY] = this.food.getPosition();
     this.snake.grow();
     this.food.randomMove();
@@ -92,7 +83,7 @@ export class SnakeManager implements GameManager {
     }
   }
 
-  drawBorders(): void {
+  private drawBorders(): void {
     this.p5.push();
     this.p5.noFill();
     this.p5.strokeWeight(2 * Config.unitLength);
@@ -100,7 +91,7 @@ export class SnakeManager implements GameManager {
     this.p5.pop();
   }
 
-  drawGameOverMessage(): void {
+  private drawGameOverMessage(): void {
     this.p5.push();
     this.p5.fill(0);
     this.p5.textSize(30);

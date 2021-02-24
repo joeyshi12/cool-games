@@ -7,25 +7,30 @@ import {Ball} from './ball';
 
 export class PongManager implements GameManager {
   p5: P5;
-  width = 650;
-  height = 450;
+  width;
+  height;
   private readonly player: Paddle;
   private readonly opponent: Paddle;
-  private ball: Ball;
+  private readonly ball: Ball;
   private readonly tally: number[];
   private countDown: number;
 
   constructor(p5: P5) {
     this.p5 = p5;
-    this.player = new Paddle(p5, Config.padding);
-    this.opponent = new Paddle(p5, Config.width - Config.padding - Paddle.width);
-    this.ball = new Ball(p5, [this.player, this.opponent]);
+    this.width = Config.width;
+    this.height = Config.height;
+    this.ball = new Ball(p5);
+    this.player = new Paddle(p5, Config.margin, this.ball, false);
+    this.opponent = new Paddle(p5, Config.width - Config.margin - Paddle.width, this.ball);
     this.tally = [0, 0];
     this.countDown = 0;
   }
 
   preload(): void {
-    this.ball.setBounceSound(new P5.SoundFile('/assets/bounce_sound.wav'));
+    const soundFile = new P5.SoundFile('/assets/bounce_sound.wav');
+    soundFile.setVolume(0.04);
+    this.player.setBounceSound(soundFile);
+    this.opponent.setBounceSound(soundFile);
   }
 
   setup(): void {
@@ -36,7 +41,7 @@ export class PongManager implements GameManager {
   update(): void {
     this.handleGameOver();
     this.player.update();
-    this.updateOpponent();
+    this.opponent.update();
     this.ball.update();
   }
 
@@ -56,21 +61,15 @@ export class PongManager implements GameManager {
     this.p5.pop();
   }
 
-  updateOpponent(): void {
-    if (this.ball.getHorizontalDirection() > 0) {
-      const dy = this.opponent.getY() - this.ball.getY() + Paddle.height / 2;
-      if (dy > 5) {
-        this.opponent.setDirection(-1);
-      } else if (dy < 5) {
-        this.opponent.setDirection(1);
-      } else {
-        this.opponent.setDirection(0);
-      }
-      this.opponent.update();
-    }
+  keyPressListener(keyCode: number): void {
+    this.player.keyPressListener(keyCode);
   }
 
-  drawBackground(): void {
+  keyReleaseListener(keyCode: number): void {
+    this.player.keyReleaseListener(keyCode);
+  }
+
+  private drawBackground(): void {
     this.p5.push();
     this.p5.background(0);
     this.p5.fill(255);
@@ -81,23 +80,7 @@ export class PongManager implements GameManager {
     this.p5.pop();
   }
 
-  keyPressListener(keyCode: number): void {
-    if (keyCode === 87) {
-      this.player.setDirection(-1);
-    } else if (keyCode === 83) {
-      this.player.setDirection(1);
-    }
-  }
-
-  keyReleaseListener(keyCode: number): void {
-    if (keyCode === 87 && this.player.getDirection() === -1) {
-      this.player.setDirection(0);
-    } else if (keyCode === 83 && this.player.getDirection() === 1) {
-      this.player.setDirection(0);
-    }
-  }
-
-  handleGameOver(): void {
+  private handleGameOver(): void {
     if (this.ball.getX() >= 0 && this.ball.getX() + Ball.diameter <= Config.width) {
       return;
     }

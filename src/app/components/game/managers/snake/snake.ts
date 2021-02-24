@@ -15,6 +15,7 @@ export class Snake {
   readonly positionsX: number[];
   readonly positionsY: number[];
   private size: number;
+  private isDead: boolean;
 
   constructor(p5: P5) {
     this.p5 = p5;
@@ -22,9 +23,14 @@ export class Snake {
     this.positionsX = [5, 4, 3];
     this.positionsY = [10, 10, 10];
     this.size = 3;
+    this.isDead = false;
   }
 
   update(): void {
+    if (this.hasCollided()) {
+      this.isDead = true;
+      return;
+    }
     if (this.direction === Direction.up) {
       this.positionsX.unshift(this.positionsX[0]);
       this.positionsY.unshift(this.positionsY[0] - 1);
@@ -57,19 +63,29 @@ export class Snake {
     this.size++;
   }
 
-  checkCollide(): boolean {
+  hasCollided(): boolean {
+    if (this.isDead) {
+      return true;
+    }
+    const notWithinBoundsX = this.positionsX[0] === 0 || this.positionsX[0] === Config.cols - 1;
+    const notWithinBoundsY = this.positionsY[0] === 0 || this.positionsY[0] === Config.rows - 1;
+    if (notWithinBoundsX || notWithinBoundsY) {
+      return true;
+    }
     for (let i = 1; i < this.size; i++) {
       if (this.positionsX[0] === this.positionsX[i] && this.positionsY[0] === this.positionsY[i]) {
         return true;
       }
     }
-    const notWithinBoundsX = this.positionsX[0] === 0 || this.positionsX[0] === Config.cols - 1;
-    const notWithinBoundsY = this.positionsY[0] === 0 || this.positionsY[0] === Config.rows - 1;
-    return notWithinBoundsX || notWithinBoundsY;
+    return false;
   }
 
   getSize(): number {
     return this.size;
+  }
+
+  getIsDead(): boolean {
+    return this.isDead;
   }
 
   setDirection(direction: Direction): void {
