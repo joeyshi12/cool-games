@@ -7,6 +7,8 @@ import {Ball} from './ball';
 
 export class PongManager implements GameManager {
   p5: P5;
+  width;
+  height;
   private readonly player: Paddle;
   private readonly opponent: Paddle;
   private readonly ball: Ball;
@@ -15,6 +17,8 @@ export class PongManager implements GameManager {
 
   constructor(p5: P5) {
     this.p5 = p5;
+    this.width = Config.width;
+    this.height = Config.height;
     this.ball = new Ball(p5);
     this.player = new Paddle(p5, Config.margin, this.ball, false);
     this.opponent = new Paddle(p5, Config.width - Config.margin - Paddle.width, this.ball);
@@ -24,26 +28,14 @@ export class PongManager implements GameManager {
 
   preload(): void {
     const soundFile = new P5.SoundFile('/assets/pong/bounce_sound.wav');
-    soundFile.setVolume(0.1);
+    soundFile.setVolume(0.04);
     this.player.setBounceSound(soundFile);
     this.opponent.setBounceSound(soundFile);
   }
 
   setup(): void {
-    const canvas = this.p5.createCanvas(Config.width, Config.height);
+    const canvas = this.p5.createCanvas(this.width, this.height);
     canvas.parent('sketch-holder');
-  }
-
-  mouseMoveListener(): void { }
-
-  mouseClickListener(): void { }
-
-  keyPressListener(): void {
-    this.player.keyPressListener();
-  }
-
-  keyReleaseListener(): void {
-    this.player.keyReleaseListener();
   }
 
   update(): void {
@@ -67,6 +59,14 @@ export class PongManager implements GameManager {
       this.p5.pop();
     }
     this.p5.pop();
+  }
+
+  keyPressListener(keyCode: number): void {
+    this.player.keyPressListener(keyCode);
+  }
+
+  keyReleaseListener(keyCode: number): void {
+    this.player.keyReleaseListener(keyCode);
   }
 
   private drawBackground(): void {
