@@ -156,6 +156,8 @@ export class GameRun extends Page {
     this.player.setX(60);
     this.player.setY(15 * Global.unitLength + 9);
     this.map = new GameMap(this.p5, Global.mapData, this.manager.getSpriteSheet());
+    Global.camera.adjustBoundary(0, this.map.getData().getNumCols() * Global.unitLength, 0,
+      this.map.getData().getNumRows() * Global.unitLength);
     this.ghosts = this.respawnGhosts();
   }
 
