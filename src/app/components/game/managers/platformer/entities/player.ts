@@ -59,13 +59,6 @@ export class Player extends Entity {
     [this.x, this.y] = this.nextPosition();
   }
 
-  handleCollisions(map: GameMap): void {
-    this.handleGroundCollision(map);
-    this.handleCeilingCollision(map);
-    this.handleLeftCollision(map);
-    this.handleRightCollision(map);
-  }
-
   jump(): void {
     if (this.isGrounded) {
       this.playJumpSound();
@@ -85,7 +78,14 @@ export class Player extends Entity {
     }
   }
 
-  handleGroundCollision(map: GameMap): void {
+  private handleCollisions(map: GameMap): void {
+    this.handleGroundCollision(map);
+    this.handleCeilingCollision(map);
+    this.handleLeftCollision(map);
+    this.handleRightCollision(map);
+  }
+
+  private handleGroundCollision(map: GameMap): void {
     if (this.vy < 0) {
       this.isGrounded = false;
       return;
@@ -111,7 +111,7 @@ export class Player extends Entity {
     }
   }
 
-  handleCeilingCollision(map: GameMap): void {
+  private handleCeilingCollision(map: GameMap): void {
     const topTileRow = Math.floor(this.y / Global.unitLength) - 1;
     const leftTileCol = Math.floor(this.x / Global.unitLength);
     const rightTileCol = Math.floor((this.x + this.width) / Global.unitLength);
@@ -127,7 +127,7 @@ export class Player extends Entity {
     }
   }
 
-  handleLeftCollision(map: GameMap): void {
+  private handleLeftCollision(map: GameMap): void {
     const [x, y] = this.nextPosition();
     const leftTileCol = Math.floor((x + this.width / 2) / Global.unitLength) - 1;
     const topTileRow = Math.floor(y / Global.unitLength);
@@ -144,7 +144,7 @@ export class Player extends Entity {
     }
   }
 
-  handleRightCollision(map: GameMap): void {
+  private handleRightCollision(map: GameMap): void {
     const [x, y] = this.nextPosition();
     const rightTileCol = Math.floor((x + this.width / 2) / Global.unitLength) + 1;
     const topTileRow = Math.floor(y / Global.unitLength);
@@ -161,14 +161,14 @@ export class Player extends Entity {
     }
   }
 
-  updateVelocity(): void {
+  private updateVelocity(): void {
     if (!this.isGrounded) {
       this.vy += this.GRAVITY;
     }
     this.updateHorizontalVelocity();
   }
 
-  updateHorizontalVelocity(): void {
+  private updateHorizontalVelocity(): void {
     if (this.direction === 0 || this.isDead) {
       if (this.vx > 0) {
         this.vx = Math.max(0, this.vx - this.ACCELERATION);
@@ -184,7 +184,7 @@ export class Player extends Entity {
     }
   }
 
-  updateAnimation(): void {
+  private updateAnimation(): void {
     if (this.isDead) {
       this.animator.setAnimIdx(5);
     } else {
