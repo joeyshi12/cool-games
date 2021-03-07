@@ -61,12 +61,16 @@ export class PongManager implements GameManager {
     this.p5.pop();
   }
 
-  keyPressListener(keyCode: number): void {
-    this.player.keyPressListener(keyCode);
+  mouseClickListener(): void { }
+
+  mouseMoveListener(): void { }
+
+  keyPressListener(): void {
+    this.player.keyPressListener();
   }
 
-  keyReleaseListener(keyCode: number): void {
-    this.player.keyReleaseListener(keyCode);
+  keyReleaseListener(): void {
+    this.player.keyReleaseListener();
   }
 
   private drawBackground(): void {
