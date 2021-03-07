@@ -5,7 +5,6 @@ import {GameManager} from './game-manager';
 import {SnakeManager} from './managers/snake/snake-manager';
 import {PlatformerManager} from './managers/platformer/platformer-manager';
 import {PongManager} from './managers/pong/pong-manager';
-import {CursedPongManager} from './managers/cursed_pong/cursed-pong-manager';
 
 @Component({
   selector: 'app-game',
@@ -31,8 +30,6 @@ export class GameComponent implements OnInit, OnDestroy {
         return new PongManager(p5);
       case 'snake':
         return new SnakeManager(p5);
-      case 'cursed_pong':
-        return new CursedPongManager(p5);
       default:
         throw Error('invalid game id encountered');
     }
@@ -43,8 +40,10 @@ export class GameComponent implements OnInit, OnDestroy {
       const gameManager = this.createManager(p5, id);
       p5.preload = () => { gameManager.preload(); };
       p5.setup = () => { gameManager.setup(); };
-      p5.keyPressed = () => { gameManager.keyPressListener(p5.keyCode); };
-      p5.keyReleased = () => { gameManager.keyReleaseListener(p5.keyCode); };
+      p5.mouseMoved = () => { gameManager.mouseMoveListener(); };
+      p5.mouseClicked = () => { gameManager.mouseClickListener(); };
+      p5.keyPressed = () => { gameManager.keyPressListener(); };
+      p5.keyReleased = () => { gameManager.keyReleaseListener(); };
       p5.draw = () => {
         gameManager.draw();
         gameManager.update();

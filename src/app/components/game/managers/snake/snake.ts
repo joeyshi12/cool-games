@@ -26,6 +26,15 @@ export class Snake {
     this.isDead = false;
   }
 
+  draw(): void {
+    this.p5.push();
+    this.p5.fill(0, 255, 0);
+    for (let i = 0; i < this.size; i++) {
+      this.p5.square(this.positionsX[i] * Config.unitLength, this.positionsY[i] * Config.unitLength, Config.unitLength);
+    }
+    this.p5.pop();
+  }
+
   update(): void {
     if (this.hasCollided()) {
       this.isDead = true;
@@ -46,15 +55,6 @@ export class Snake {
     }
     this.positionsX.pop();
     this.positionsY.pop();
-  }
-
-  draw(): void {
-    this.p5.push();
-    this.p5.fill(0, 255, 0);
-    for (let i = 0; i < this.size; i++) {
-      this.p5.square(this.positionsX[i] * Config.unitLength, this.positionsY[i] * Config.unitLength, Config.unitLength);
-    }
-    this.p5.pop();
   }
 
   grow(): void {

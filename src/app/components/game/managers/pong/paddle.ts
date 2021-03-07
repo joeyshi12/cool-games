@@ -33,21 +33,23 @@ export class Paddle {
     this.p5.rect(this.x, this.y, Paddle.width, Paddle.height);
   }
 
-  keyPressListener(keyCode: number): void {
+  keyPressListener(): void {
+    const key = this.p5.key.toUpperCase();
     if (!this.isAutomatic) {
-      if (keyCode === 87) {
+      if (key === 'W') {
         this.setDirection(-1);
-      } else if (keyCode === 83) {
+      } else if (key === 'S') {
         this.setDirection(1);
       }
     }
   }
 
-  keyReleaseListener(keyCode: number): void {
+  keyReleaseListener(): void {
+    const key = this.p5.key.toUpperCase();
     if (!this.isAutomatic) {
-      if (keyCode === 87 && this.getDirection() === -1) {
+      if (key === 'W' && this.getDirection() === -1) {
         this.setDirection(0);
-      } else if (keyCode === 83 && this.getDirection() === 1) {
+      } else if (key === 'S' && this.getDirection() === 1) {
         this.setDirection(0);
       }
     }
