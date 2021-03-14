@@ -1,5 +1,5 @@
 import * as P5 from 'p5';
-import {GameManager} from '../../game-manager';
+import {GameManager} from '../../game.service';
 import {Direction, Snake} from './snake';
 import {Food} from './food';
 import {Config} from './config';

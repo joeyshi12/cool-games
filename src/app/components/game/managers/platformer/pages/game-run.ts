@@ -1,6 +1,6 @@
 import * as P5 from 'p5';
 import {Page} from './page';
-import {Control, PlatformerManager, Sound} from '../platformer-manager';
+import {PlatformerManager} from '../platformer-manager';
 import {Global} from '../util/global';
 import {Player} from '../entities/player';
 import {GameMap} from '../util/game-map';
@@ -9,7 +9,7 @@ import {Ghost} from '../entities/ghost';
 
 export class GameRun extends Page {
   private isPaused: boolean;
-  private player: Player;
+  private readonly player: Player;
   private ghosts: Array<Ghost>;
   private map: GameMap;
 
@@ -39,7 +39,7 @@ export class GameRun extends Page {
 
   keyPressListener(): void {
     if (this.p5.key.toUpperCase() === 'ESCAPE') {
-      this.manager.playSound(Sound.pause);
+      this.manager.playSound('pause');
       this.isPaused = !this.isPaused;
     } else if (!this.player.getIsDead()) {
       this.handlePlayerMovement();
@@ -48,17 +48,17 @@ export class GameRun extends Page {
 
   keyReleaseListener(): void {
     switch (this.p5.key.toUpperCase()) {
-      case this.manager.getKeyBinding(Control.left):
+      case this.manager.getKeyBinding('left'):
         if (this.player.getDirection() === -1) {
           this.player.setDirection(0);
         }
         break;
-      case this.manager.getKeyBinding(Control.right):
+      case this.manager.getKeyBinding('right'):
         if (this.player.getDirection() === 1) {
           this.player.setDirection(0);
         }
         break;
-      case this.manager.getKeyBinding(Control.jump):
+      case this.manager.getKeyBinding('jump'):
         if (this.player.getVelY() < 0) {
           this.player.setVelY(this.player.getVelY() * 0.5);
         }
@@ -95,16 +95,16 @@ export class GameRun extends Page {
 
   private handlePlayerMovement(): void {
     switch (this.p5.key.toUpperCase()) {
-      case this.manager.getKeyBinding(Control.left):
+      case this.manager.getKeyBinding('left'):
         this.player.setDirection(-1);
         break;
-      case this.manager.getKeyBinding(Control.right):
+      case this.manager.getKeyBinding('right'):
         this.player.setDirection(1);
         break;
-      case this.manager.getKeyBinding(Control.jump):
+      case this.manager.getKeyBinding('jump'):
         this.player.jump();
         break;
-      case this.manager.getKeyBinding(Control.drop):
+      case this.manager.getKeyBinding('drop'):
         this.player.dropFromPlatform(this.map);
         break;
     }

@@ -1,5 +1,5 @@
 #sketch-holder {
   display: flex;
   justify-content: center;
-  margin-top: 10vh;
+  padding: 10vh;
 }

@@ -2,7 +2,7 @@ import * as P5 from 'p5';
 import {Global} from '../util/global';
 import {GameMap} from '../util/game-map';
 import {Animator} from '../util/animator';
-import {PlatformerManager, Sound} from '../platformer-manager';
+import {PlatformerManager} from '../platformer-manager';
 import {Entity} from './entity';
 
 export class Player extends Entity {
@@ -28,8 +28,8 @@ export class Player extends Entity {
     this.p5 = p5;
     this.vx = 0;
     this.vy = 0;
-    this.playJumpSound = () => { manager.playSound(Sound.jump); };
-    this.playLandSound = () => { manager.playSound(Sound.land); };
+    this.playJumpSound = () => { manager.playSound('jump'); };
+    this.playLandSound = () => { manager.playSound('land'); };
     this.direction = 0;
     this.animator = new Animator([[7, 18], [7, 19], [7, 20], [7, 21], [7, 22], [7, 23]], manager.getSpriteSheet(), 1);
     this.animTimer = this.ANIMATION_BUFFER;

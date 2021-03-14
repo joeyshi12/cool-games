@@ -1,19 +1,14 @@
-#header {
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  background: #1E2832;
+#body {
+  height: 100vh;
 }
 
-#footer {
+#header {
   display: flex;
+  height: 100px;
+  padding: 16px 24px;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 80px;
-  font-size: 14px;
-  color: white;
   background: #1E2832;
+  color: white;
 }
 
 .title {

@@ -1,6 +1,6 @@
 import * as P5 from 'p5';
 import 'p5/lib/addons/p5.sound';
-import {GameManager} from '../../game-manager';
+import {GameManager} from '../../game.service';
 import {Config} from './config';
 import {Paddle} from './paddle';
 import {Ball} from './ball';

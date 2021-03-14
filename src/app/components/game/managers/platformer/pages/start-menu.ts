@@ -1,7 +1,7 @@
 import * as P5 from 'p5';
 import {Page} from './page';
 import {Global} from '../util/global';
-import {PlatformerManager, Sound} from '../platformer-manager';
+import {PlatformerManager} from '../platformer-manager';
 import {OptionsMenu} from './options-menu';
 import {GameRun} from './game-run';
 
@@ -18,10 +18,10 @@ export class StartMenu extends Page {
 
   mouseClickListener(): void {
     if (this.isButtonSelected('start')) {
-      this.manager.playSound(Sound.click);
+      this.manager.playSound('click');
       this.manager.setPage(new GameRun(this.p5, this.manager));
     } else if (this.isButtonSelected('options')) {
-      this.manager.playSound(Sound.click);
+      this.manager.playSound('click');
       this.manager.setPage(new OptionsMenu(this.p5, this.manager));
     }
   }

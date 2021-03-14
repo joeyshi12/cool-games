@@ -1,5 +1,5 @@
 import * as P5 from 'p5';
-import {PlatformerManager, Sound} from '../platformer-manager';
+import {PlatformerManager} from '../platformer-manager';
 
 class Button {
   private p5: P5;
@@ -81,7 +81,7 @@ export abstract class Page {
       return false;
     }
     if (button.getIsFocused()) {
-      this.manager.playSound(Sound.click);
+      this.manager.playSound('click');
       return true;
     } else {
       return false;
