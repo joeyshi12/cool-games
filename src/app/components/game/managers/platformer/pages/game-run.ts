@@ -119,7 +119,7 @@ export class GameRun extends Page {
       }
       this.map.setDataToLeftMap();
       this.player.setX(this.map.getData().getNumCols() * Global.unitLength - this.player.getWidth() / 2);
-      this.respawnGhosts();
+      this.ghosts = this.respawnGhosts();
       Global.camera.adjustBoundary(0, this.map.getData().getNumCols() * Global.unitLength, 0,
         this.map.getData().getNumRows() * Global.unitLength);
     } else if (centerX > this.map.getData().getNumCols() * Global.unitLength) {
@@ -129,7 +129,7 @@ export class GameRun extends Page {
       }
       this.map.setDataToRightMap();
       this.player.setX(-this.player.getWidth() / 2);
-      this.respawnGhosts();
+      this.ghosts = this.respawnGhosts();
       Global.camera.adjustBoundary(0, this.map.getData().getNumCols() * Global.unitLength, 0,
         this.map.getData().getNumRows() * Global.unitLength);
     }
