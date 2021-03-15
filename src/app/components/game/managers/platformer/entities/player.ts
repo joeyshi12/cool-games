@@ -11,9 +11,6 @@ export class Player extends Entity {
   MAX_SPEED = 4.2;
   ANIMATION_BUFFER = 6;
   JUMP_VELOCITY = 9.4;
-  private p5: P5;
-  private vx: number;
-  private vy: number;
   private readonly playJumpSound: () => void;
   private readonly playLandSound: () => void;
   private direction: number;
@@ -24,10 +21,7 @@ export class Player extends Entity {
   private isDead: boolean;
 
   constructor(p5: P5, x: number, y: number, manager: PlatformerManager) {
-    super(x, y, 26, 22);
-    this.p5 = p5;
-    this.vx = 0;
-    this.vy = 0;
+    super(p5, x, y, 0, 0, 26, 22);
     this.playJumpSound = () => { manager.playSound('jump'); };
     this.playLandSound = () => { manager.playSound('land'); };
     this.direction = 0;
@@ -205,10 +199,6 @@ export class Player extends Entity {
     }
   }
 
-  nextPosition(): [number, number] {
-    return [this.x + this.vx, this.y + this.vy];
-  }
-
   private drawCollisionBox(): void {
     const [x, y] = Global.camera.shift(this.x, this.y);
     this.p5.push();
@@ -217,24 +207,12 @@ export class Player extends Entity {
     this.p5.pop();
   }
 
-  getVelX(): number {
-    return this.vx;
-  }
-
-  getVelY(): number {
-    return this.vy;
-  }
-
   getDirection(): number {
     return this.direction;
   }
 
   getIsDead(): boolean {
     return this.isDead;
-  }
-
-  setVelY(vy: number): void {
-    this.vy = vy;
   }
 
   setDirection(direction: number): void {

@@ -10,7 +10,7 @@ import {Ghost} from '../entities/ghost';
 export class GameRun extends Page {
   private isPaused: boolean;
   private readonly player: Player;
-  private ghosts: Array<Ghost>;
+  private ghosts!: Array<Ghost>;
   private map: GameMap;
 
   constructor(p5: P5, manager: PlatformerManager) {
@@ -18,9 +18,10 @@ export class GameRun extends Page {
     this.isPaused = false;
     this.player = new Player(p5, 60, 15 * Global.unitLength + 9, manager);
     this.map = new GameMap(p5, Global.mapData, manager.getSpriteSheet());
-    this.ghosts = this.respawnGhosts();
+    this.respawnGhosts();
     this.setButton('reset', Global.width / 2 - 25, 140);
     this.setButton('exit', Global.width / 2 - 20, 170);
+    Global.camera.update(this.player.getX(), this.player.getY());
   }
 
   mouseMoveListener(): void {
@@ -39,7 +40,9 @@ export class GameRun extends Page {
 
   keyPressListener(): void {
     if (this.p5.key.toUpperCase() === 'ESCAPE') {
-      this.manager.playSound('pause');
+      if (!this.isPaused) {
+        this.manager.playSound('pause');
+      }
       this.isPaused = !this.isPaused;
     } else if (!this.player.getIsDead()) {
       this.handlePlayerMovement();
@@ -119,7 +122,7 @@ export class GameRun extends Page {
       }
       this.map.setDataToLeftMap();
       this.player.setX(this.map.getData().getNumCols() * Global.unitLength - this.player.getWidth() / 2);
-      this.ghosts = this.respawnGhosts();
+      this.respawnGhosts();
       Global.camera.adjustBoundary(0, this.map.getData().getNumCols() * Global.unitLength, 0,
         this.map.getData().getNumRows() * Global.unitLength);
     } else if (centerX > this.map.getData().getNumCols() * Global.unitLength) {
@@ -129,7 +132,7 @@ export class GameRun extends Page {
       }
       this.map.setDataToRightMap();
       this.player.setX(-this.player.getWidth() / 2);
-      this.ghosts = this.respawnGhosts();
+      this.respawnGhosts();
       Global.camera.adjustBoundary(0, this.map.getData().getNumCols() * Global.unitLength, 0,
         this.map.getData().getNumRows() * Global.unitLength);
     }
@@ -158,11 +161,11 @@ export class GameRun extends Page {
     this.map = new GameMap(this.p5, Global.mapData, this.manager.getSpriteSheet());
     Global.camera.adjustBoundary(0, this.map.getData().getNumCols() * Global.unitLength, 0,
       this.map.getData().getNumRows() * Global.unitLength);
-    this.ghosts = this.respawnGhosts();
+    this.respawnGhosts();
   }
 
-  private respawnGhosts(): Array<Ghost> {
-    return this.map.getData().getInitialGhostPositions().map(([x, y]) =>
+  private respawnGhosts(): void {
+    this.ghosts = this.map.getData().getInitialGhostPositions().map(([x, y]) =>
       new Ghost(this.p5, x, y, this.player, this.manager.getSpriteSheet().get(26 * 16 + 1, 6 * 16, 14, 16)));
   }
 }

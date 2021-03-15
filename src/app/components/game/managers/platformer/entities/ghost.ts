@@ -7,21 +7,16 @@ export class Ghost extends Entity {
   SPEED = 2;
   RANGE = 320;
   UPDATE_BUFFER = 20;
-  private p5: P5;
   private target: Player;
-  private vx: number;
-  private vy: number;
   private angle: number;
   private updateTimer: number;
   private triggered: boolean;
   private readonly sprite: any;
 
   constructor(p5: P5, x: number, y: number, target: Player, sprite: P5.Image) {
-    super(x, y, 36, 36);
+    super(p5, x, y, 0, 0, 36, 36);
     this.p5 = p5;
     this.target = target;
-    this.vx = 0;
-    this.vy = 0;
     this.angle = Math.random() * 2 * Math.PI;
     this.updateTimer = 20;
     this.triggered = false;
