@@ -6,10 +6,7 @@ A collection of p5.js web games hosted at <a href="https://coolgames.joeyshi.tec
 <body>
   <p>This example demonstrates how to assign an "onclick" event to a p element.</p>
 
-  <p id="demo" onclick="(() => {
-    const x = document.getElementById('element');
-    x.innerHTML = 1;
-  })()">
+  <p onclick="console.log(2)">
     Click me.
   </p>
   <p id="element">0</p>
