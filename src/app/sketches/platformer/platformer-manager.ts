@@ -1,6 +1,6 @@
 import * as P5 from 'p5';
 import 'p5/lib/addons/p5.sound';
-import {GameManager} from '../../game.service';
+import {GameManager} from '../../components/canvas/game.service';
 import {Page} from './pages/page';
 import {Global} from './util/global';
 import {StartMenu} from './pages/start-menu';

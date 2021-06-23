@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as P5 from 'p5';
-import {PlatformerManager} from './managers/platformer/platformer-manager';
-import {PongManager} from './managers/pong/pong-manager';
-import {SnakeManager} from './managers/snake/snake-manager';
+import {PlatformerManager} from '../../sketches/platformer/platformer-manager';
+import {PongManager} from '../../sketches/pong/pong-manager';
+import {SnakeManager} from '../../sketches/snake/snake-manager';
 
 export interface GameManager {
   p5: P5;

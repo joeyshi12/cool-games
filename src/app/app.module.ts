@@ -3,14 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GameComponent } from './components/game/game.component';
-import { SelectionComponent } from './components/selection/selection.component';
+import { CanvasComponent } from './components/canvas/canvas.component';
+import {SketchDetailsComponent} from "./components/sketch-details/sketch-details.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent,
-    SelectionComponent
+    CanvasComponent,
+    SketchDetailsComponent,
   ],
   imports: [
     BrowserModule,

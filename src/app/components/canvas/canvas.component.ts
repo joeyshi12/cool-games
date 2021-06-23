@@ -3,11 +3,11 @@ import {ActivatedRoute} from '@angular/router';
 import {GameService} from './game.service';
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  selector: 'canvas',
+  templateUrl: './canvas.component.html',
+  styleUrls: ['./canvas.component.css']
 })
-export class GameComponent implements OnInit, OnDestroy {
+export class CanvasComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private route: ActivatedRoute

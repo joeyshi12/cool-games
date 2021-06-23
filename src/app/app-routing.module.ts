@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {SelectionComponent} from './components/selection/selection.component';
-import {GameComponent} from './components/game/game.component';
+import {CanvasComponent} from './components/canvas/canvas.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/selection', pathMatch: 'full' },
-  { path: 'selection', component: SelectionComponent },
-  { path: 'game/:id', component: GameComponent }
+  { path: 'canvas/:id', component: CanvasComponent }
 ];
 
 @NgModule({

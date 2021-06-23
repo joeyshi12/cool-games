@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SketchName, availableSketchMetadataList, SketchMetadata} from "./sketches/sketch";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cool-games';
+  public sketchMetadataList: SketchMetadata[];
+
+  constructor() {
+    this.sketchMetadataList = availableSketchMetadataList;
+  }
+
+  getSketchLink(name: SketchName) {
+    return "game/" + name;
+  }
 }
