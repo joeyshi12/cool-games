@@ -1,13 +1,13 @@
 import {Page} from './page';
 import {StartMenu} from './start-menu';
 import * as P5 from 'p5';
-import {PlatformerManager} from '../platformer-manager';
+import {PlatformerSketch} from '../platformer-sketch';
 import {Global} from '../util/global';
 
 export class OptionsMenu extends Page {
   private selectedControl: string | undefined;
 
-  constructor(p5: P5, manager: PlatformerManager) {
+  constructor(p5: P5, manager: PlatformerSketch) {
     super(p5, manager);
     this.setButton('left', Global.width / 2 - 60, Global.height / 2 - 100);
     this.setButton('right', Global.width / 2 - 60, Global.height / 2 - 60);

@@ -1,6 +1,6 @@
 import * as P5 from 'p5';
 import {Page} from './page';
-import {PlatformerManager} from '../platformer-manager';
+import {PlatformerSketch} from '../platformer-sketch';
 import {Global} from '../util/global';
 import {Player} from '../entities/player';
 import {GameMap} from '../util/game-map';
@@ -13,7 +13,7 @@ export class GameRun extends Page {
   private ghosts!: Array<Ghost>;
   private map: GameMap;
 
-  constructor(p5: P5, manager: PlatformerManager) {
+  constructor(p5: P5, manager: PlatformerSketch) {
     super(p5, manager);
     this.isPaused = false;
     this.player = new Player(p5, 60, 15 * Global.unitLength + 9, manager);
