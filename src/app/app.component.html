@@ -1,13 +1,15 @@
 <div class="main-container">
   <div class="header">
-    <h2>{{messages.coolGames}}</h2>
+    <h2 class="title">{{messages.coolGames}}</h2>
   </div>
   <div class="content">
-    <div class="menu" *ngFor="let metadata of sketchMetadataList">
-      <sketch-details class="game-details"
-                      [routerLink]="getSketchLink(metadata.sketchName)"
-                      [sketchMetadata]="metadata">
-      </sketch-details>
+    <div class="menu">
+      <div class="menu-content" *ngFor="let metadata of sketchMetadataList"> 
+          <sketch-details class="game-details"
+                          [routerLink]="getSketchLink(metadata.sketchName)"
+                          [sketchMetadata]="metadata">
+          </sketch-details>
+      </div>
     </div>
     <div class="game-window">
       <router-outlet></router-outlet>

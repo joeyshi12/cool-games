@@ -1,0 +1,17 @@
+.sketch-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 14rem;
+    height: 20rem;
+    margin-bottom: 2rem;
+}
+
+.sketch-image {
+    width: 100%;
+    height: 66%;
+}
+
+.details {
+    height: 34%;
+    margin-left: 1rem;
+}

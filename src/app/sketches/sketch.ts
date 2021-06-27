@@ -21,24 +21,25 @@ export enum SketchName {
 export interface SketchMetadata {
   sketchName: SketchName,
   displayName: string,
-  description: string
+  description: string,
 }
+
 
 export const availableSketchMetadataList: SketchMetadata[] = [
   {
     sketchName: SketchName.platformer,
     displayName: "Platformer",
-    description: "Bruh",
+    description: "This is a platformer game",
   },
   {
     sketchName: SketchName.pong,
     displayName: "Pong",
-    description: "Bruh",
+    description: "This is pong",
   },
   {
     sketchName: SketchName.snake,
     displayName: "Snake",
-    description: "Bruh",
+    description: "This is the snake game lmao",
   }
 ]
 

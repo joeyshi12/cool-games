@@ -1,1 +1,7 @@
-<p *ngIf="sketchMetadata">{{sketchMetadata.sketchName}}</p>
+<div class="sketch-details-container" *ngIf="sketchMetadata">
+    <img class="sketch-image" src="{{imagePath}}" alt=""/>
+    <div class="details">
+        <p>{{sketchMetadata.displayName}}</p>
+        <p>{{sketchMetadata.description}}</p>
+    </div>
+</div>

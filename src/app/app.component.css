@@ -1,17 +1,24 @@
-#body {
-  height: 100vh;
+.main-container {
+    height: 100%;
 }
 
-#header {
-  display: flex;
-  height: 100px;
-  padding: 16px 24px;
-  align-items: center;
-  background: #1E2832;
-  color: white;
+.header {
+    display: flex;
+    height: 3rem;
+    padding: 1rem 2rem;
+    align-items: center;
+    background: #1E2832;
 }
 
 .title {
-  color: white;
-  font-family: Verdana, serif;
+    color: white;
+    font-family: Verdana, serif;
+}
+
+.menu {
+    margin: 1rem;
+    height: 40rem;
+    width: 15rem;
+    overflow: auto;
+    white-space: nowrap;
 }
