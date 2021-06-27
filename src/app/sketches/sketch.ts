@@ -24,5 +24,4 @@ export interface SketchMetadata {
   description: string,
 }
 
-export const sketchId = "sketch"
 export const sketchHolderId = "sketch-holder";
