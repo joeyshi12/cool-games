@@ -1,11 +1,11 @@
 import * as P5 from 'p5';
 import 'p5/lib/addons/p5.sound';
-import {GameManager} from '../../game.service';
 import {Config} from './config';
 import {Paddle} from './paddle';
 import {Ball} from './ball';
+import {Sketch, sketchHolderId} from "../sketch";
 
-export class PongManager implements GameManager {
+export class PongSketch implements Sketch {
   p5: P5;
   width;
   height;
@@ -35,7 +35,7 @@ export class PongManager implements GameManager {
 
   setup(): void {
     const canvas = this.p5.createCanvas(this.width, this.height);
-    canvas.parent('sketch-holder');
+    canvas.parent(sketchHolderId);
   }
 
   update(): void {

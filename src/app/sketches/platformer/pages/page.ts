@@ -1,5 +1,5 @@
 import * as P5 from 'p5';
-import {PlatformerManager} from '../platformer-manager';
+import {PlatformerSketch} from '../platformer-sketch';
 
 class Button {
   private p5: P5;
@@ -51,10 +51,10 @@ class Button {
 
 export abstract class Page {
   protected p5: P5;
-  protected manager: PlatformerManager;
+  protected manager: PlatformerSketch;
   protected readonly buttonMap: Map<string, Button>;
 
-  protected constructor(p5: P5, manager: PlatformerManager) {
+  protected constructor(p5: P5, manager: PlatformerSketch) {
     this.p5 = p5;
     this.manager = manager;
     this.buttonMap = new Map<string, Button>();

@@ -1,12 +1,12 @@
 import * as P5 from 'p5';
 import {Page} from './page';
 import {Global} from '../util/global';
-import {PlatformerManager} from '../platformer-manager';
+import {PlatformerSketch} from '../platformer-sketch';
 import {OptionsMenu} from './options-menu';
 import {GameRun} from './game-run';
 
 export class StartMenu extends Page {
-  constructor(p5: P5, manager: PlatformerManager) {
+  constructor(p5: P5, manager: PlatformerSketch) {
     super(p5, manager);
     this.setButton('start', Global.width / 2 - 25, Global.height / 2 - 16);
     this.setButton('options', Global.width / 2 - 35, Global.height / 2 + 16);

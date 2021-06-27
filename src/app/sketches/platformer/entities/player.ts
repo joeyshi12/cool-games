@@ -2,7 +2,7 @@ import * as P5 from 'p5';
 import {Global} from '../util/global';
 import {GameMap} from '../util/game-map';
 import {Animator} from '../util/animator';
-import {PlatformerManager} from '../platformer-manager';
+import {PlatformerSketch} from '../platformer-sketch';
 import {Entity} from './entity';
 
 export class Player extends Entity {
@@ -20,7 +20,7 @@ export class Player extends Entity {
   private isFacingRight: boolean;
   private isDead: boolean;
 
-  constructor(p5: P5, x: number, y: number, manager: PlatformerManager) {
+  constructor(p5: P5, x: number, y: number, manager: PlatformerSketch) {
     super(p5, x, y, 0, 0, 26, 22);
     this.playJumpSound = () => { manager.playSound('jump'); };
     this.playLandSound = () => { manager.playSound('land'); };

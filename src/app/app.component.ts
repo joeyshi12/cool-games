@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {sketchId, SketchMetadata, SketchName} from "./sketches/sketch";
+import {Messages} from "./messages";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,44 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cool-games';
+  public messages: Messages;
+  public sketchNames: SketchName[];
+
+  constructor() {
+    this.messages = new Messages;
+    this.sketchNames = [
+      SketchName.platformer,
+      SketchName.pong,
+      SketchName.snake,
+    ]
+  }
+
+  getSketchLink(name: SketchName) {
+    return sketchId + '/' + name;
+  }
+
+  public getSketchMetadata(sketchName: SketchName): SketchMetadata {
+    switch (sketchName) {
+      case SketchName.platformer:
+        return {
+          id: sketchName,
+          displayName: this.messages.platformer,
+          description: this.messages.platformerDescription,
+        };
+      case SketchName.pong:
+        return {
+          id: sketchName,
+          displayName: this.messages.pong,
+          description: this.messages.pongDescription,
+        };
+      case SketchName.snake:
+        return {
+          id: sketchName,
+          displayName: this.messages.snake,
+          description: this.messages.snakeDescription,
+        };
+      default:
+        throw new Error("Invalid sketch name received");
+    }
+  }
 }

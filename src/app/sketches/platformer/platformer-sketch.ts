@@ -1,11 +1,11 @@
 import * as P5 from 'p5';
 import 'p5/lib/addons/p5.sound';
-import {GameManager} from '../../game.service';
 import {Page} from './pages/page';
 import {Global} from './util/global';
 import {StartMenu} from './pages/start-menu';
+import {Sketch, sketchHolderId} from "../sketch";
 
-export class PlatformerManager implements GameManager {
+export class PlatformerSketch implements Sketch {
   p5: P5;
   private spriteSheet!: P5.Image;
   private page!: Page;
@@ -37,7 +37,7 @@ export class PlatformerManager implements GameManager {
 
   setup(): void {
     const canvas = this.p5.createCanvas(Global.width, Global.height);
-    canvas.parent('sketch-holder');
+    canvas.parent(sketchHolderId);
     this.p5.textFont(this.fontFace);
     this.p5.frameRate(60);
     this.page = new StartMenu(this.p5, this);

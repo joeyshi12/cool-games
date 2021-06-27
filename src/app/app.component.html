@@ -1,7 +1,18 @@
-<div id="body">
-  <div id="header">
-    <div><a routerLink="/"><img src="assets/favicon.ico" alt=""></a></div>
-    <h1><a routerLink="/" class="title">Cool Games</a></h1>
+<div class="main-container">
+  <div class="header">
+    <img src="favicon.ico" alt="">
+    <h1 class="title">{{messages.coolGames}}</h1>
   </div>
-  <router-outlet></router-outlet>
+  <div class="content">
+    <div class="menu-container">
+        <sketch-details *ngFor="let name of sketchNames"
+                        class="game-details"
+                        [routerLink]="getSketchLink(name)"
+                        [sketchMetadata]="getSketchMetadata(name)">
+        </sketch-details>
+    </div>
+    <div class="canvas-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

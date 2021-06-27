@@ -1,10 +1,10 @@
 import * as P5 from 'p5';
-import {GameManager} from '../../game.service';
 import {Direction, Snake} from './snake';
 import {Food} from './food';
 import {Config} from './config';
+import {Sketch, sketchHolderId} from "../sketch";
 
-export class SnakeManager implements GameManager {
+export class SnakeSketch implements Sketch {
   p5: P5;
   width;
   height;
@@ -25,7 +25,7 @@ export class SnakeManager implements GameManager {
 
   setup(): void {
     const canvas = this.p5.createCanvas(this.width, this.height);
-    canvas.parent('sketch-holder');
+    canvas.parent(sketchHolderId);
     this.p5.frameRate(18);
   }
 
