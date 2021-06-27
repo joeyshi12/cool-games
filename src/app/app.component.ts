@@ -20,10 +20,6 @@ export class AppComponent {
     ]
   }
 
-  getSketchLink(name: SketchName) {
-    return name;
-  }
-
   public getSketchMetadata(sketchName: SketchName): SketchMetadata {
     switch (sketchName) {
       case SketchName.platformer:

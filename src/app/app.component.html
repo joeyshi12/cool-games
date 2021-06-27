@@ -7,7 +7,7 @@
     <div class="menu-container">
         <sketch-details *ngFor="let name of sketchNames"
                         class="game-details"
-                        [routerLink]="getSketchLink(name)"
+                        [routerLink]="name"
                         [sketchMetadata]="getSketchMetadata(name)">
         </sketch-details>
     </div>
