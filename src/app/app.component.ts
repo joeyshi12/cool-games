@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {sketchId, SketchMetadata, SketchName} from "./sketches/sketch";
+import {SketchMetadata, SketchName} from "./sketches/sketch";
 import {Messages} from "./messages";
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   getSketchLink(name: SketchName) {
-    return sketchId + '/' + name;
+    return name;
   }
 
   public getSketchMetadata(sketchName: SketchName): SketchMetadata {
