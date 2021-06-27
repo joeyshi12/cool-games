@@ -1,17 +1,17 @@
 <div class="main-container">
   <div class="header">
-    <h2 class="title">{{messages.coolGames}}</h2>
+    <img src="favicon.ico" alt="">
+    <h1 class="title">{{messages.coolGames}}</h1>
   </div>
   <div class="content">
-    <div class="menu">
-      <div class="menu-content" *ngFor="let metadata of sketchMetadataList"> 
-          <sketch-details class="game-details"
-                          [routerLink]="getSketchLink(metadata.sketchName)"
-                          [sketchMetadata]="metadata">
-          </sketch-details>
-      </div>
+    <div class="menu-container">
+        <sketch-details *ngFor="let name of sketchNames"
+                        class="game-details"
+                        [routerLink]="getSketchLink(name)"
+                        [sketchMetadata]="getSketchMetadata(name)">
+        </sketch-details>
     </div>
-    <div class="game-window">
+    <div class="canvas-container">
       <router-outlet></router-outlet>
     </div>
   </div>

@@ -10,11 +10,10 @@ export class SketchDetailsComponent {
   @Input() sketchMetadata?: SketchMetadata
 
   public get imagePath(): string {
-      if (this.sketchMetadata) {
-          const name = this.sketchMetadata.sketchName;
-          return "/assets/" + name + "/" + name + ".png";
-      } else {
-          return "";
-      }
+    if (this.sketchMetadata !== undefined) {
+      return '/assets/' + this.sketchMetadata.id + '/' + this.sketchMetadata.id + '.png';
+    } else {
+      return "";
+    }
   }
 }

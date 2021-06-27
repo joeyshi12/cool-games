@@ -15,32 +15,14 @@ export interface Sketch {
 export enum SketchName {
   platformer = "platformer",
   pong = "pong",
-  snake = "snake"
+  snake = "snake",
 }
 
 export interface SketchMetadata {
-  sketchName: SketchName,
+  id: SketchName,
   displayName: string,
   description: string,
 }
 
-
-export const availableSketchMetadataList: SketchMetadata[] = [
-  {
-    sketchName: SketchName.platformer,
-    displayName: "Platformer",
-    description: "This is a platformer game",
-  },
-  {
-    sketchName: SketchName.pong,
-    displayName: "Pong",
-    description: "This is pong",
-  },
-  {
-    sketchName: SketchName.snake,
-    displayName: "Snake",
-    description: "This is the snake game lmao",
-  }
-]
-
+export const sketchId = "sketch"
 export const sketchHolderId = "sketch-holder";
