@@ -11,7 +11,7 @@ export class SketchDetailsComponent {
 
   public get imagePath(): string {
     if (this.sketchMetadata !== undefined) {
-      return '/assets/' + this.sketchMetadata.id + '/' + this.sketchMetadata.id + '.png';
+      return './assets/' + this.sketchMetadata.id + '/' + this.sketchMetadata.id + '.png';
     } else {
       return "";
     }

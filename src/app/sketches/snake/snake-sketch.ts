@@ -20,7 +20,7 @@ export class SnakeSketch implements Sketch {
   }
 
   preload(): void {
-    this.food.setImage(this.p5.loadImage('/assets/snake/apple.png'));
+    this.food.setImage(this.p5.loadImage('./assets/snake/apple.png'));
   }
 
   setup(): void {
