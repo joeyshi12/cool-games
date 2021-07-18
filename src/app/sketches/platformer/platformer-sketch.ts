@@ -25,13 +25,13 @@ export class PlatformerSketch implements Sketch {
   }
 
   preload(): void {
-    this.fontFace = this.p5.loadFont('./assets/platformer/inconsolata.otf');
-    this.spriteSheet = this.p5.loadImage('./assets/platformer/spritesheet.png');
+    this.fontFace = this.p5.loadFont('assets/platformer/inconsolata.otf');
+    this.spriteSheet = this.p5.loadImage('assets/platformer/spritesheet.png');
     this.soundMap = new Map<string, P5.SoundFile>([
-      ['click', new P5.SoundFile('./assets/platformer/click.mp3')],
-      ['pause', new P5.SoundFile('./assets/platformer/pause.mp3')],
-      ['jump', new P5.SoundFile('./assets/platformer/jump.mp3')],
-      ['land', new P5.SoundFile('./assets/platformer/land.mp3')]
+      ['click', new P5.SoundFile('assets/platformer/click.mp3')],
+      ['pause', new P5.SoundFile('assets/platformer/pause.mp3')],
+      ['jump', new P5.SoundFile('assets/platformer/jump.mp3')],
+      ['land', new P5.SoundFile('assets/platformer/land.mp3')]
     ]);
   }
 
